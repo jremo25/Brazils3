@@ -1,37 +1,193 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First Webpage</title>
+    <title>Passport Bro's Gallery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: black;
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            transition: background-color 2s; /* Smooth transition for background color change */
+            color: #333;
+        }
+        .slider {
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 2s ease;
+        }
+        .slides img {
+            width: auto; 
+            max-height: 550px; 
+            object-fit: cover; 
+        }
+
+        .slide-arrow {
+            cursor: pointer;
+            position: absolute;
+            top: 150%;
+            transform: translateY(-50%);
+            padding: 10px;
             color: white;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            z-index: 100;
+        }
+
+        .prev-arrow {
+            left: 10px;
+        }
+
+        .next-arrow {
+            right: 10px;
+        }
+
+        .hero {
+            text-align: left; 
+            background: url('pic.png') no-repeat center center; 
+            background-size: cover; 
+            padding: 230px 20px; 
+        }
+        .hero h1 { 
+            color: #ddd;
+            font-size: 2.5em; 
+            margin-bottom: 0.5em; 
+        }
+        .hero h1, .hero h2 {
+            padding-left: 5px; 
+            position: relative;
+            top: 95px;
+            color: #ddd;
+        }
+        .hero h2 { 
+            color: #ddd; 
+            font-size: 1.2em; 
+        }
+        .main { 
+            margin: 35px ;
+            padding: 51px; 
+            text-align: center;
+        }
+        .gallery { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+        }
+        .gallery img { 
+            max-width: 100%; 
+            height: auto; 
+            padding: 10px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery img:hover { 
+             transform: scale(1.1); 
+             box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+             transition: transform 0.3s ease, box-shadow 0.3s ease; 
+             z-index: 10; 
+        }
+        .video { 
+            margin: 40px 0; 
+        }
+        iframe { 
+            width: 80%; 
+            height: 300px; 
+        }
+        .footer { 
+            background-color: #333; 
+            color: white; 
+            text-align: center; 
+            padding: 20px 0; 
+            font-weight: 300;
+        }
+        @media screen and (max-width: 600px) { 
+            iframe { width: 100%; } 
         }
     </style>
 </head>
 <body>
+
+<div class="hero">
     <h1>Passport Bro's</h1>
-    <h1>Belezas Brasileiras</h1>
+    <h2>Brasileira Beleza</h2>
+</div>
 
-    <p>Brasileira 1:</p>
-    <img src="pic1.png" width="500" />
+<div class="main">
+    <div class="slider">
+        <div class="slides">
+            <img src="pic1.png" alt="Photo 1">
+            <img src="pic2.png" alt="Photo 2">
+            <img src="pic3.png" alt="Photo 3">
+            <img src="pic4.png" alt="Photo 4">
+            <img src="pic5.png" alt="Photo 5">
+            <img src="pic6.png" alt="Photo 6">
+            <img src="pic7.png" alt="Photo 7">
+            <img src="pic8.png" alt="Photo 8">
+            <img src="pic9.png" alt="Photo 9">
+            <img src="pic10.png" alt="Photo 10">
+            <img src="pic11.png" alt="Photo 11">
+            <img src="pic12.png" alt="Photo 12">
+            <img src="pic13.png" alt="Photo 13">
+            <img src="pic14.png" alt="Photo 14">
+        </div>
+        <button class="slide-arrow prev-arrow">&#10094;</button>
+        <button class="slide-arrow next-arrow">&#10095;</button>
+    </div>
+    <div class="video">
+        <iframe src="https://www.youtube.com/embed/ocjaskWvcTM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
 
-    <p>Brasileira 2:</p>
-    <img src="pic2.png" width="500" />
+<div class="footer">
+    <p>Powered by Revan</p>
+</div>
 
-    <p>Brasileira 3:</p>
-    <img src="pic3.png" width="500" />
-
-    <p>Indiana:</p>
-    <img src="pic4.png" width="500" />
-
-    <p>Brasileira 5:</p>
-    <img src="pic5.png" width="500" />
-
-    <p>Brasileira 6:</p>
-    <img src="pic6.png" width="500" />
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var slides = document.querySelector('.slides');
+        var slideIndex = 0;
+        var totalSlides = slides.children.length;
     
-    <p>Brasileira Vídeo:</p>
-    <iframe width="500" height="250" src="https://www.youtube.com/embed/ocjaskWvcTM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        document.querySelector('.next-arrow').addEventListener('click', function() {
+            nextSlide();
+        });
+    
+        document.querySelector('.prev-arrow').addEventListener('click', function() {
+            prevSlide();
+        });
+    
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % totalSlides;
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+        }
+    
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+        }
+    
+        // Initialize background color change
+        function changeBackgroundColor() {
+            var red = Math.floor(Math.random() * 256);
+            var green = Math.floor(Math.random() * 256);
+            var blue = Math.floor(Math.random() * 256);
+            var bgColor = "rgb(" + red + "," + green + "," + blue + ")";
+            document.body.style.backgroundColor = bgColor;
+        }
+    
+        // Change background color every 3 seconds
+        setInterval(changeBackgroundColor, 3000);
+    });
+</script>
+    
+
 </body>
 </html>
