@@ -1,6 +1,6 @@
 # Route 53 alias record for the CloudFront distribution
 resource "aws_route53_record" "www" {
-  zone_id = "Z01161102TG0OT709R2HD"
+  zone_id = ""
   name    = "revanwar.com"
   type    = "A"
 
